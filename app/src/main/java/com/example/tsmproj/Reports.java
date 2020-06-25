@@ -15,7 +15,7 @@ public class Reports extends AppCompatActivity {
     SquatSQLHelper squatdb;
     DeadliftSQLHelper deadliftdb;
     ChestpressSQLHelper chestpressdb;
-    TextView totalkg;
+    TextView totalkg, chesttotal, squattotal, deadtotal;
     AdView adView;
 
     @Override
@@ -24,10 +24,14 @@ public class Reports extends AppCompatActivity {
         setContentView(R.layout.activity_reports);
 
         totalkg = (TextView) findViewById(R.id.totalkg);
+        chesttotal = (TextView) findViewById(R.id.chestkg);
+        squattotal = (TextView) findViewById(R.id.squatkg);
+        deadtotal = (TextView) findViewById(R.id.deadkg);
         squatdb = new SquatSQLHelper(this);
         chestpressdb = new ChestpressSQLHelper(this);
         deadliftdb = new DeadliftSQLHelper(this);
         loadtotal();
+        getValueSum();
 
         // Initialize the Mobile Ads SDK.
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -82,6 +86,18 @@ public class Reports extends AppCompatActivity {
         int maxbenchpress = chestpressdb.getHighestVal();
         int maxdeadlift=  deadliftdb.getHighestVal();
         totalkg.setText(Integer.toString(maxsquat+maxbenchpress+maxdeadlift) + " kg");
+    }
+
+
+    private void getValueSum() {
+        int res = chestpressdb.getSumVal();
+        chesttotal.setText(Integer.toString(res) +" kg");;
+
+        int res2 = deadliftdb.getSumVal();
+        deadtotal.setText(Integer.toString(res2) +" kg");;
+
+        int res3 = squatdb.getSumVal();
+        squattotal.setText(Integer.toString(res3) +" kg");;
     }
     @Override
     public void finish() {

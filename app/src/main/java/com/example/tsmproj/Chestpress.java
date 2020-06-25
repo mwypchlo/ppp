@@ -78,17 +78,6 @@ public class Chestpress extends AppCompatActivity {
         bestScore.setText(Integer.toString(res) +" kg");;
     }
 
-    public int getWeight(int id){
-        int res = chestpresdb.getInfoById(id);
-        int date = chestpresdb.getDateById(id);
-        return res;
-    }
-
-    public int getDate(int id){
-        int date = chestpresdb.getDateById(id);
-        return date;
-    }
-
     public void viewall(){
         viewAllButton.setOnClickListener(
                 new View.OnClickListener() {

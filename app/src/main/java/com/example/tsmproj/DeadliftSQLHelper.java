@@ -60,8 +60,15 @@ public class DeadliftSQLHelper extends SQLiteOpenHelper {
         }
         else {
             return true;
+        } }
+
+        public int getSumVal(){
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor c = db.rawQuery("SELECT SUM(weight*reps) FROM "+DEADLIFT_TABLE, null);
+            c.moveToFirst();
+            return c.getInt(0);
         }
-    }
+
     public void clearDatabase() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE "+DEADLIFT_TABLE);

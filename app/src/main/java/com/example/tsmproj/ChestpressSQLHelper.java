@@ -44,20 +44,13 @@ public class ChestpressSQLHelper extends SQLiteOpenHelper {
         c.moveToFirst();
         return c.getInt(0);
     }
-    public int getInfoById(int id){
+
+    public int getSumVal(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT "+CHESTPRESS_WEIGHT+" FROM "+CHESTPRESS_TABLE + " WHERE "+CHESTPRESS_ID+" = "+id,  null);
+        Cursor c = db.rawQuery("SELECT SUM(weight*reps) FROM "+CHESTPRESS_TABLE, null);
         c.moveToFirst();
         return c.getInt(0);
     }
-
-    public int getDateById(int id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT "+CHESTPRESS_DATE+" FROM "+CHESTPRESS_TABLE + " WHERE "+CHESTPRESS_ID+" = "+id, null);
-        c.moveToFirst();
-        return c.getInt(0);
-    }
-
 
     public Cursor getAllInfo(){
         SQLiteDatabase db = this.getWritableDatabase();
